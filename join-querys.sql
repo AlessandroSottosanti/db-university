@@ -43,7 +43,7 @@ INNER JOIN `teachers`
 ON `teachers`.`id` = `course_teacher`.`teacher_id`
 ORDER BY `degrees`.`name`;
 
-6. SELECT `teachers`.* , `departments`.`name`, COUNT(`teachers`.`id`) AS `tot_teachers`
+6. SELECT `teachers`.* , `departments`.`name`, COUNT(`teachers`.`id`) AS `degrees_number_for_teacher`
 FROM `teachers`
 INNER JOIN `course_teacher`
 ON `teachers`.`id` = `course_teacher`.`teacher_id`
@@ -55,4 +55,4 @@ INNER JOIN `departments`
 ON `degrees`.`department_id` = `departments`.`id`
 WHERE `departments`.`name` = 'Dipartimento di Matematica'
 GROUP BY `teachers`.`id`
-ORDER BY `tot_teachers` DESC;
+ORDER BY `degrees_number_for_teacher` DESC;
