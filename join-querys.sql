@@ -56,3 +56,10 @@ ON `degrees`.`department_id` = `departments`.`id`
 WHERE `departments`.`name` = 'Dipartimento di Matematica'
 GROUP BY `teachers`.`id`
 ORDER BY `degrees_number_for_teacher` DESC;
+
+7. SELECT `exam_student`.`student_id`, `students`.`surname` AS `student_surname` , `students`.`name` AS `student_name`, `exam_student`.`vote` AS `vote` , `exam_student`.`exam_id` , COUNT(`exam_student`.`student_id`) AS `attempts`
+FROM `exam_student`
+INNER JOIN `students`
+ON `exam_student`.`student_id` = `students`.`id`
+GROUP BY  `exam_student`.`student_id`, `exam_student`.`exam_id`
+ORDER BY `exam_student`.`student_id`, `exam_student`.`exam_id`;
