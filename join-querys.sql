@@ -57,9 +57,14 @@ WHERE `departments`.`name` = 'Dipartimento di Matematica'
 GROUP BY `teachers`.`id`
 ORDER BY `degrees_number_for_teacher` DESC;
 
-7. SELECT `exam_student`.`student_id`, `students`.`surname` AS `student_surname` , `students`.`name` AS `student_name`, `exam_student`.`vote` AS `vote` , `exam_student`.`exam_id` , COUNT(`exam_student`.`student_id`) AS `attempts`
-FROM `exam_student`
-INNER JOIN `students`
-ON `exam_student`.`student_id` = `students`.`id`
-GROUP BY  `exam_student`.`student_id`, `exam_student`.`exam_id`
-ORDER BY `exam_student`.`student_id`, `exam_student`.`exam_id`;
+7. SELECT `students`.`id` AS `student_id`,  `students`.`surname` AS `student_surname`, `students`.`name` AS `student_name`,`courses`.`id` AS `course_id`, `courses`.`name` AS `course_name`, COUNT(`exam_student`.`vote`) AS `attempts`, MAX(`exam_student`.`vote`) as `max_vote`
+FROM `students`
+INNER JOIN `exam_student`
+ON `students`.`id`= `exam_student`.`student_id`
+INNER JOIN `exams`
+ON `exams`.`id` = `exam_student`.`exam_id`
+INNER JOIN `courses`
+ON `exams`.`course_id` = `courses`.`id` 
+GROUP BY `students`.`id`, `courses`.`id`
+HAVING `max_vote` >= 18
+ORDER BY `students`.`id` AND `courses`.`id`;
